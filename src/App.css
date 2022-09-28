@@ -40,12 +40,14 @@
     color: white;
 }
 
+
 .cursor {
-    background: white;
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
+    background: url('./mrvn.svg');
+    height: 748px;
+    width: 1586px;
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
 }
+
