@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { motion } from 'framer-motion'
 
 function App() {
+const [mousePos, setMousePos] = useState({
+  x:0,
+  y:0
+})
+console.log(mousePos)
+
+useEffect(() => {
+  const mouseMove = e => {
+    setMousePos({
+      x: e.clientX,
+      y: e.clientY
+    })
+  }
+
+  window.addEventListener('mousemove', mouseMove)
+
+  return () => {
+    window.removeEventListener('mousemove', mouseMove)
+  }
+}, [])
+
+
+const variants = {
+  default: {
+    x: mousePos.x -16, //to center it (minus(cursorsize/2))
+    y: mousePos.y -16
+  }
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="noise-background">
+      <div className="text"><h1>CUSTOM CURSOR</h1></div>
+      <motion.div 
+      className="cursor"
+      variants={variants}
+      animate='default'
+      />
     </div>
   );
 }
